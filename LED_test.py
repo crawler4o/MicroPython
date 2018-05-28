@@ -11,4 +11,3 @@ while True:
         pyb.delay(200)
         x.toggle()
         pyb.delay(200)
-# cock
