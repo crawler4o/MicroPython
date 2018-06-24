@@ -1,4 +1,4 @@
-# PyBoard
-MicroPyton scripts for PyBoard
+# MicroPython
+Ideas and more ...
 
-First steps... :-)
+
