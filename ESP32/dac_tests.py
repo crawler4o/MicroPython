@@ -14,17 +14,25 @@ b = machine.ADC(q)
 
 
 while True:
-	reading = b.read()
-	print(reading)
-	if reading < 256:
-		a.write(reading)
-	else:
-		a.write(reading % 255)
+reading = b.read()
+if reading < 400: reading = 0
+else: reading -= 400
+print(reading)
+a.write(reading % 200)
+
 
 
 while True:
-    b.read()
-	time.sleep(0.5)
+reading = b.read()
+reading -= 40
+reading = max(0,reading)
+print(reading)
+a.write(reading % 255)
+time.sleep(0.002)
+
+while True:
+b.read()
+time.sleep(0.5)
 	
 	
 while True:
@@ -37,10 +45,10 @@ while True:
 
 	
 while True:
-	sound = int(t*((15&t>>11)%12)&55-(t>>5|t>>12)|t*(t>>10)*32) & 255
-	print(sound)
-	a.write(sound) 
-	t += 1
+sound = int(t*((15&t>>11)%12)&55-(t>>5|t>>12)|t*(t>>10)*32) & 255
+print(sound)
+a.write(sound) 
+t += 1
 	
 	
 while True:
