@@ -6,18 +6,28 @@
 # https://pycom.io/support-community/support/video-tutorials/#
 # https://www.thethingsnetwork.org/forum/t/single-channel-gateway-part-3/11546
 # https://www.thethingsnetwork.org/
+# https://lemariva.com/blog/2018/10/micropython-esp32-sending-data-using-lora
 
+# And some useful commands
 # esptool.py --chip esp32 --port COM9 write_flash -z 0x1000 esp32-20181114-v1.9.4-683-gd94aa577a.bin
 # esptool.py --chip esp32 erase_flash
 
 # import webrepl_setup  # to activate the webrepl
 
+import os
 import network
 
-# Connecting to the home wifi
-sta_if = network.WLAN(network.STA_IF)
-sta_if.active(True)
-# sta_if.scan()                           # Scan for available access points
-sta_if.connect("Amidophen", "x18abe4rz")  # Connect to an AP
-sta_if.isconnected()                      # Check for successful connection
 
+def wlan_connect(ssid='Amidophen', password='x18abe4rz'):
+    wlan = network.WLAN(network.STA_IF)
+    if not wlan.active() or not wlan.isconnected():
+        wlan.active(True)
+        print('connecting to: ', ssid)
+        wlan.connect(ssid, password)
+        while not wlan.isconnected():
+            pass
+    print('network config:', wlan.ifconfig())
+
+
+if __name__ == '__main__':
+    wlan_connect()
