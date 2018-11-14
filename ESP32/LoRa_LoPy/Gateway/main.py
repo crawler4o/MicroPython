@@ -6,7 +6,8 @@
 # https://pycom.io/support-community/support/video-tutorials/#
 # https://www.thethingsnetwork.org/forum/t/single-channel-gateway-part-3/11546
 # https://www.thethingsnetwork.org/
-# https://lemariva.com/blog/2018/10/micropython-esp32-sending-data-using-lora
+# https://lemariva.com/blog/2018/10/micropython-esp32-sending-data-using-lora  # how to commission the LoRa
+# https://www.instructables.com/id/MicroPython-on-an-ESP32-Board-With-Integrated-SSD1/  # how to commission the oled
 
 # And some useful commands
 # esptool.py --chip esp32 --port COM9 write_flash -z 0x1000 esp32-20181114-v1.9.4-683-gd94aa577a.bin
