@@ -17,18 +17,36 @@
 
 import os
 import network
+import machine
+import ssd1306
 
 
 def wlan_connect(ssid='Amidophen', password='x18abe4rz'):
+    global wlan
     wlan = network.WLAN(network.STA_IF)
+
     if not wlan.active() or not wlan.isconnected():
         wlan.active(True)
         print('connecting to: ', ssid)
         wlan.connect(ssid, password)
         while not wlan.isconnected():
             pass
+
     print('network config:', wlan.ifconfig())
+
+
+def oled_enable():
+    i2c = machine.I2C(scl=machine.Pin(16), sda=machine.Pin(2))  # 15 , 4
+    oled = ssd1306.SSD1306_I2C(128, 64, i2c)
+
+    oled.fill(0)
+    oled.text('LoRa on air: False', 0, 0)
+    oled.text('WiFi on air: {}'.format(wlan.isconnected()), 0, 10)
+    oled.text('IP {}'.format(wlan.ifconfig()[0]), 0, 20)
+    oled.text('Mask {}'.format(wlan.ifconfig()[1]), 0, 30)
+    oled.show()
 
 
 if __name__ == '__main__':
     wlan_connect()
+    oled_enable()
